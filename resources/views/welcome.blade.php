@@ -36,12 +36,7 @@
   </thead>
   <tbody>
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><a href="" data-toggle="modal" data-target="#exampleModal">Edit </a>| <a href="">Delete </a></td>
-    </tr>
+       <td v-for></td>
   </tbody>
 </table>
          
@@ -85,7 +80,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-      //  var items = @json($items ?? '');
+     
     </script>
     <script>
       var vm = new Vue({
@@ -104,8 +99,7 @@
             },
             methods: {
                 postNewItem() {
-                    axios.get('url', 'parameters');
-                    axios.post('/projects/'+this.project.id+'/tasks', this.new_task)
+                    axios.post('/inventory/'+this.inventory.inventory_id+'/', this.new_task)
                         .then(({data})=>{
                             this.tasks.push(data);
                             this.new_task.title = '';
