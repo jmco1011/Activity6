@@ -21,4 +21,24 @@ class ReportsController extends Controller
 
     	return response()->download('Jco Certificate.docx');
     }
+
+
+    public function excel()
+    {
+    //import librart
+   	//get templates
+    //fill in the templates
+    //save
+    //dl file
+    	$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('./templates/form138.xlsx');
+
+$worksheet = $spreadsheet->getActiveSheet();
+
+$worksheet->getCell('A7')->setValue('Name:John Cena');
+$worksheet->getCell('A8')->setValue('11-B');
+
+$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xls');
+$writer->save('form138.xls');
+return response()->download('form138.xls');
+    }
 }

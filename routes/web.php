@@ -15,3 +15,4 @@ Route::get('/inventory/create','inventoryController@create');
 Route::post('/inventory/{inventory}/store','InventoryController@store');
 Route::post('/inventory/{inventory}/delete','inventoryController@delete');
 Route::get('/word','ReportsController@word');
+Route::get('/excel','ReportsController@excel');
