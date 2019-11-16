@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return view('welcome');
+});
+
 
 Route::get('/inventory/create','inventoryController@create');
 Route::post('/inventory/{inventory}/store','InventoryController@store');

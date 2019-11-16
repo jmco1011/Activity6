@@ -14,7 +14,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-   
+
+
+
+   <form method="post" action = "/index">
     <div>
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="float: right;">
@@ -54,18 +57,17 @@
       </div>
       <div class="modal-body">
         <form>
+          
             <label for="name" class="col-form-label">Name</label>
             <input type="text" class="form-control" v-model='inventory.name'>
             <label for="text" class="col-form-label">Quantity</label>
             <input type="number" class="form-control" v-model='inventory.qty'></input>
             <label for="text" class="col-form-label">Category</label><br />
-            <select name = "" id = "" v-on:change = "fetchStudent()" 
-        v-model = "selected_section">
- 
-            <option >
-            </option>
-    
-        </select>
+          <select v-model = "category.name">
+            @foreach($category as $category)
+          <option value="{{ $category.name }}" v-model=""></option>
+          @endforeach
+          </select>
           </div>
     </form>
       </div>
@@ -76,7 +78,9 @@
     </div>
   </div>
 </div>
+</form>
   </body>
+
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
@@ -92,28 +96,29 @@
                         inventory_id = 1,
                         name:'',
                         qty: '',
-                        Category: '',
+                        category: '';
                 }
 
                 
             },
             methods: {
                 postNewItem() {
-                    axios.post('/inventory/'+this.inventory.inventory_id+'/', this.new_task)
+                    axios.post('/inventory/'+this.inventory.inventory_id+'/', this.inventory)
                         .then(({data})=>{
-                            this.tasks.push(data);
-                            this.new_task.title = '';
+                            this.items.push(data);
+                            this.inventory.name = '';
                             console.log(data);
                         });
                 },
-                deleteTask(task) {
-                    axios.post('/tasks/'+task.id+'/delete')
+                deleteItem(item) {
+                    axios.post('/inventory/'+inventory.inventory_id+'/delete')
                         .then(function(response){
-                            var index = vm.tasks.indexOf(task);
+                            var index = vm.tasks.indexOf(inventory);
                             vm.tasks.splice(index, 1);
                         });
                 }
             }
         });
     </script>
+
 </html>
